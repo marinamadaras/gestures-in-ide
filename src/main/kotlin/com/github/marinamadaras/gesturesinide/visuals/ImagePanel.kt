@@ -9,6 +9,5 @@ class ImagePanel(private val image: BufferedImage) : JComponent() {
     override fun paintComponent(g: Graphics) {
         super.paintComponent(g)
         g.drawImage(image, 0, 0, width, height, this)
-        println("Content set")
     }
 }
