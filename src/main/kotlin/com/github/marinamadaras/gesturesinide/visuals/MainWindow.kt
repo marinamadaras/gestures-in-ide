@@ -1,6 +1,5 @@
 package com.github.marinamadaras.gesturesinide.visuals
 
-import com.github.marinamadaras.gesturesinide.UIConstants
 import java.awt.Dimension
 import javax.swing.JFrame
 

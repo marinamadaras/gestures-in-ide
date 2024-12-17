@@ -1,5 +1,6 @@
 package com.github.marinamadaras.gesturesinide.visuals.interactiveComponents
 
+import com.github.marinamadaras.gesturesinide.visuals.UIConstants
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.image.BufferedImage
@@ -8,9 +9,10 @@ import javax.imageio.ImageIO
 /**
  * Implementation of an interactive component that displays a meme.
  */
-class MemeComponent : InteractiveComponent() {
-
-    private val memeImage: BufferedImage = ImageIO.read(this::class.java.getResource("/images/meme.png"))
+class MemeComponent(
+    private val memeImage:
+        BufferedImage = ImageIO.read(MemeComponent::class.java.getResource(UIConstants.MEME_PATH)))
+        : InteractiveComponent() {
 
     init {
         val minSize = getMinSize()

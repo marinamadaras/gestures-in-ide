@@ -1,6 +1,6 @@
 package com.github.marinamadaras.gesturesinide.handlers
 
-import com.github.marinamadaras.gesturesinide.UIConstants
+import com.github.marinamadaras.gesturesinide.visuals.UIConstants
 import com.github.marinamadaras.gesturesinide.model.Position
 import com.github.marinamadaras.gesturesinide.model.Size
 import com.github.marinamadaras.gesturesinide.visuals.interactiveComponents.InteractiveComponent
@@ -105,6 +105,7 @@ class MouseInteractionHandler(private val component: InteractiveComponent,
         component.position = Position()
         component.currentSize = Size()
         entrySideHandler.reset()
+        prevDistance = 0
         component.repaint()
     }
 }
