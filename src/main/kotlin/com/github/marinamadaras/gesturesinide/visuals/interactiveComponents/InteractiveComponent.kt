@@ -1,112 +1,66 @@
 package com.github.marinamadaras.gesturesinide.visuals.interactiveComponents
 
-import com.github.marinamadaras.gesturesinide.listeners.ContentMouseListener
-import com.github.marinamadaras.gesturesinide.listeners.ContentMouseMotionListener
-import com.github.marinamadaras.gesturesinide.visuals.EmptyPanel
+import com.github.marinamadaras.gesturesinide.model.Position
+import com.github.marinamadaras.gesturesinide.model.Size
+
+import java.awt.Dimension
 import java.awt.Graphics
-import java.awt.event.MouseAdapter
-import java.awt.event.MouseEvent
-import java.awt.event.MouseMotionAdapter
 import javax.swing.JComponent
-import kotlin.math.abs
 
-//    var content: JComponent = EmptyPanel()
-//        set(value) {
-//            remove(field)
-//            field = value
-//            add(value)
-//            value.setBounds(0, 0, width, height)
-//            revalidate()
-//            repaint()
-//        }
-//
-//    private var contentX = -100
-//    private var contentY = -100
-//    private var contentSize = 50
-//    private val minSize = 50 // 1/4 of full size
-//    private val maxSize = 200 // Full size
-//    private var prevMouseX = 0
-//    private var prevMouseY = 0
-//    private var growing = true // Is the size increasing?
-//
-//    init {
-//        layout = null
-//        add(content)
-//
-//        addMouseMotionListener(object : MouseMotionAdapter() {
-//            override fun mouseMoved(e: MouseEvent) {
-//                val deltaX = e.x - prevMouseX
-//                val deltaY = e.y - prevMouseY
-//
-//                if (growing) {
-//                    contentSize = (contentSize + deltaX.coerceAtLeast(deltaY)).coerceAtMost(maxSize)
-//                } else {
-//                    contentSize = (contentSize - deltaX.coerceAtLeast(deltaY)).coerceAtLeast(minSize)
-//                }
-//
-//                // Update content position and size
-//                contentX = e.x - contentSize / 2
-//                contentY = e.y - contentSize / 2
-//                content.setBounds(0, 0, width, height)
-//                revalidate()
-//                repaint()
-//
-//                prevMouseX = e.x
-//                prevMouseY = e.y
-//            }
-//        })
-//
-//        addMouseListener(object : MouseAdapter() {
-//            override fun mouseEntered(e: MouseEvent) {
-//                // Reset content position
-//                contentX = e.x - contentSize / 2
-//                contentY = e.y - contentSize / 2
-//                content.setBounds(0, 0, width, height)
-//                revalidate()
-//                repaint()
-//            }
-//
-//            override fun mouseExited(e: MouseEvent) {
-//                // Hide the content off-screen
-//                contentX = -100
-//                contentY = -100
-//                content.setBounds(0, 0, width, height)
-//                revalidate()
-//                repaint()
-//            }
-//        })
-//    }
-//
-//
-//    override fun doLayout() {
-//        super.doLayout()
-//        content.setBounds(0, 0, width, height)
-//    }
+/**
+ * An abstract class that represents an interactive component, i.e. the component that can be interacted with.
+ * It acts as a wrapper for the component that needs to be displayed and updated, such that the component
+ * can be a meme, a complex Swing element etc.
+ *
+ * @property position the position of the component on the screen
+ * @property currentSize the current size of the component
+ *           (Since the size can change dynamically based on user interaction and the wrapper's content
+ *           may vary in type, tracking the size directly is more efficient than inferring it from
+ *           specific implementations of this class)
+ */
 abstract class InteractiveComponent : JComponent() {
-    var contentX: Int = -100
-    var contentY: Int = -100
-    var contentSize: Int = 0// Start at the initial size
+    var position = Position()
+    var currentSize = Size()
 
-    // Abstract methods to delegate size calculations to subclasses
-    abstract fun getInitialSize(): Int // Initial size of the content
-    abstract fun getMaxSize(): Int // Maximum allowed size for the content
 
-    init {
-        layout = null
+    /**
+     * Returns the minimum size the component can reach in its interactions.
+     */
+    abstract fun getMinSize(): Dimension
 
-        addMouseListener(ContentMouseListener(this))
-        addMouseMotionListener(ContentMouseMotionListener(this))
-    }
+    /**
+     * Returns the maximum size the component can reach in its interactions.
+     */
+    abstract fun getMaxSize(): Dimension
 
-    override fun paintComponent(g: Graphics) {
-        super.paintComponent(g)
-        if (contentX >= 0 && contentY >= 0) {
-            render(g, contentX, contentY, contentSize, contentSize)
-        }
-    }
-
-    // Abstract method for subclasses to implement their rendering logic
+    /**
+     * Has the logic for rendering the component on the screen.
+     *
+     * @param g The graphics object that will be used to render the component
+     * @param x The x coordinate of the component
+     * @param y The y coordinate of the component
+     * @param width The width of the component
+     * @param height The height of the component
+     */
     abstract fun render(g: Graphics, x: Int, y: Int, width: Int, height: Int)
 
+    /**
+     * It displays the component with its contents on the screen.
+     */
+    override fun paintComponent(g: Graphics) {
+        super.paintComponent(g)
+        render(g, position.x, position.y, currentSize.width, currentSize.height)
+    }
+
+    /**
+     * Setter method for the current size of the component.
+     *
+     * @param width The width of the component
+     * @param height The height of the component
+     */
+    fun adjustCurrentSize(width: Int, height: Int) {
+        currentSize.width = width
+        currentSize.height = height
+    }
 }
 
