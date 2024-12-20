@@ -60,6 +60,9 @@ of the way its loaded, but this just goes to show the "seamless" switch of panel
 To interact with this component, instead of the meme, you can set the boolean **_show_complex_component_** to true in the 
 [configuration file](src/main/resources/application.properties).
 
+Important note!!! Start interacting with the opened window as soon as it appears on screen, as the loading
+of the "complex" component starts as soon as the window is opened.
+
 ## Technologies used
 1. Kotlin
 2. Swing
