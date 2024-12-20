@@ -15,6 +15,8 @@ This is a plugin for JetBrains IDEs that allows you to "play" with a meme or oth
 5. Search for the "Tools" menu
 6. Select the "Display Window" option
 
+<img src="src/main/resources/images/tools_menu.png" width="200"/>
+
 ### How to interact with the window?
 
 When the window is opened, when your cursor is outside it, you will just see an empty window. When you move the cursor
@@ -24,7 +26,12 @@ based on a few rules, and they will be exemplified here for one side, but it hol
 If you enter the window with your cursor from the right side, the meme will be small. 
 - When you move your cursor
 to the left (so horizontally, in the direction of entering the window),
-the image will begin to grow in size, until it caps at its original size. 
+the image will begin to grow in size, until it caps at its original size.
+
+<img src="src/main/resources/images/start_meme.png" width="300"/>
+<img src="src/main/resources/images/middle_position_meme.png" width="300"/>
+<img src="src/main/resources/images/max_size_meme.png" width="300"/>
+
 - After the cap, 
 any further move of the cursor to the left, will just move the meme, not resize it. 
 - If you move the cursor back to the right, the meme will start shrinking, until it reaches its minimal size again.
