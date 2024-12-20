@@ -1,6 +1,6 @@
 package com.github.marinamadaras.gesturesinide.handlers
 
-import com.github.marinamadaras.gesturesinide.visuals.UIConstants
+import com.github.marinamadaras.gesturesinide.config.PropertiesConfig
 import com.github.marinamadaras.gesturesinide.model.Position
 import com.github.marinamadaras.gesturesinide.model.Size
 import com.github.marinamadaras.gesturesinide.visuals.interactiveComponents.InteractiveComponent
@@ -24,7 +24,7 @@ class MouseInteractionHandler(private val component: InteractiveComponent,
     private val entrySideHandler: EntrySideHandler = EntrySideHandler()
 
     // The speed factor is used to adjust the speed of the scaling of the component
-    private var speedFactor: Double = UIConstants.SPEED_FACTOR
+    private var speedFactor: Double = PropertiesConfig.getDouble("speed_factor")
 
     /**
      * Calculates the position where the component should be moved to based on the mouse position.

@@ -1,3 +1,4 @@
+import com.github.marinamadaras.gesturesinide.config.PropertiesConfig
 import com.github.marinamadaras.gesturesinide.managers.WindowManager
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.AnAction

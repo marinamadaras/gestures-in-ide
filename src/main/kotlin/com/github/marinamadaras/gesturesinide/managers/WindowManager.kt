@@ -1,9 +1,11 @@
 package com.github.marinamadaras.gesturesinide.managers
 
+import com.github.marinamadaras.gesturesinide.config.PropertiesConfig
 import com.github.marinamadaras.gesturesinide.listeners.WindowAreaMouseListener
 import com.github.marinamadaras.gesturesinide.listeners.InteractiveComponentMouseListener
 import com.github.marinamadaras.gesturesinide.visuals.MainWindow
 import com.github.marinamadaras.gesturesinide.handlers.MouseInteractionHandler
+import com.github.marinamadaras.gesturesinide.visuals.interactiveComponents.ComplexComponent
 import com.github.marinamadaras.gesturesinide.visuals.interactiveComponents.InteractiveComponent
 import com.github.marinamadaras.gesturesinide.visuals.interactiveComponents.MemeComponent
 import java.awt.BorderLayout
@@ -16,12 +18,25 @@ import java.awt.BorderLayout
 object WindowManager {
     private val window: MainWindow = MainWindow()
 
+    private var showComplexComponent: Boolean = PropertiesConfig.getBoolean("show_complex_component")
+
     /**
      * Displays the window and initializes the component.
      */
     fun showWindow() {
-        initializeComponent(MemeComponent())
+        val component = createComponent()
+        initializeComponent(component)
+        if (component is ComplexComponent) {
+            component.loadComponent()
+        }
         window.isVisible = true
+    }
+
+    /**
+     * Toggles the creation between the meme and complex components.
+     */
+    private fun createComponent(): InteractiveComponent {
+        return if (showComplexComponent) ComplexComponent() else MemeComponent()
     }
 
     /**

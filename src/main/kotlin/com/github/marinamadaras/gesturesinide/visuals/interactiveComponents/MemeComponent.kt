@@ -1,5 +1,6 @@
 package com.github.marinamadaras.gesturesinide.visuals.interactiveComponents
 
+import com.github.marinamadaras.gesturesinide.config.PropertiesConfig
 import com.github.marinamadaras.gesturesinide.visuals.UIConstants
 import java.awt.Dimension
 import java.awt.Graphics
@@ -11,7 +12,7 @@ import javax.imageio.ImageIO
  */
 class MemeComponent(
     private val memeImage:
-        BufferedImage = ImageIO.read(MemeComponent::class.java.getResource(UIConstants.MEME_PATH)))
+        BufferedImage = ImageIO.read(MemeComponent::class.java.getResource(PropertiesConfig.get("meme_path"))))
         : InteractiveComponent() {
 
     init {
